@@ -1,21 +1,20 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./story/store";
-import Login from "./pages/login/auth/Login";
-import Dashboard from "./pages/home/Home";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import DashboardRouter from './routes/Dashboard'
+import AuthRouter from './routes/Auth'
 
-function App() {
+const App = () => {
+  const user = useSelector(state =>
+    state.auth.isAuthenticated
+  )
+  console.log(user)
   return (
-    <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </Router>
-    </Provider>
-  );
+    <div>
+      {
+        user ? <DashboardRouter/> : <AuthRouter/> 
+      }
+    </div>
+  )
 }
 
-export default App;
+export default App

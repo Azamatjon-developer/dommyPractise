@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Register = () => {
+const Todos = () => {
   return (
     <div>
-      
+      todos 
     </div>
   )
 }
 
-export default Register
+export default Todos
