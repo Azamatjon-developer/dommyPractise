@@ -1,18 +1,28 @@
-import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../../story/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Email:", email, "Password:", password);
+    if (email === "test@gmail.com" && password === "123456") {
+      const user = { id: 1, email, token: "fake-jwt-token" };
+      dispatch(loginSuccess(user));
+      navigate("/dashboard");
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+      <form onSubmit={handleLogin} className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-bold mb-4">Login</h2>
         <input
           type="email"
