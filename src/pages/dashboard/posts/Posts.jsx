@@ -25,11 +25,11 @@ const Posts = () => {
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (
-    <div className="p-10 bg-gray-100 min-h-screen">
+    <div className="p-10">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">
         📝 Blog Postlar
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {posts.map((post) => (
           <div
             key={post.id}

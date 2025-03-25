@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FiEdit, FiTrash } from "react-icons/fi";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     axios
@@ -13,17 +14,32 @@ const Todos = () => {
         setTodos(res.data.todos);
         setLoading(false);
       })
-      .catch(() => {
-        setError("Xatolik yuz berdi !");
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, []);
 
-  const handleDelete = (id) => {
+  // ✅ Yangi todo qo'shish
+  const addTodo = () => {
+    if (!newTodo.trim()) return;
+
+    axios
+      .post("https://dummyjson.com/todos/add", {
+        todo: newTodo,
+        completed: false,
+        userId: 5,
+      })
+      .then((res) => {
+        setTodos([...todos, res.data]);
+        setNewTodo("");
+      });
+  };
+
+  // ❌ Todo o'chirish
+  const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const handleUpdate = (id) => {
+  // ✏️ Todo tahrirlash
+  const editTodo = (id) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
@@ -31,39 +47,54 @@ const Todos = () => {
   };
 
   if (loading) return <p className="text-center mt-10">⏳ Yuklanmoqda...</p>;
-  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (
-    <div className="p-10 bg-gray-100 min-h-screen">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">
-        ✅ ToDo Ro'yxati
+    <div className="max-w-lg mx-auto bg-white p-6 shadow-lg rounded-lg mt-10">
+      <h1 className="text-2xl font-bold flex items-center gap-2 mb-4">
+        📝 My Todos
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+      {/* Yangi todo qo'shish */}
+      <div className="flex mb-6">
+        <input
+          type="text"
+          className="w-full p-2 border rounded-lg"
+          placeholder="Add a new todo..."
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+        />
+        <button
+          onClick={addTodo}
+          className="ml-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+        >
+          Add
+        </button>
+      </div>
+
+      {/* ToDo Ro'yxati */}
+      <div className="space-y-3">
         {todos.map((todo) => (
           <div
             key={todo.id}
-            className={`bg-white shadow-lg rounded-xl p-6 transition duration-300 hover:scale-105 hover:shadow-2xl ${
-              todo.completed ? "border-l-8 border-green-500" : "border-l-8 border-red-500"
-            }`}
+            className="flex items-center justify-between p-3 border rounded-lg bg-gray-50 hover:bg-gray-100"
           >
-            <h2 className="text-xl font-semibold text-gray-800">
-              {todo.todo}
-            </h2>
-            <p className="text-gray-600 mt-2">
-              {todo.completed ? "✅ " : "⏳ "}
-            </p>
-            <div className="flex gap-4 mt-4">
-              <button
-                className="bg-blue-600 text-white font-semibold py-1 px-3 rounded-lg transition duration-300 hover:bg-blue-700"
-                onClick={() => handleUpdate(todo.id)}
-              >
-                ✏️ Update
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => editTodo(todo.id)}
+                className="w-5 h-5"
+              />
+              <span className={`${todo.completed ? "line-through text-gray-500" : ""}`}>
+                {todo.todo}
+              </span>
+            </div>
+            <div className="flex gap-3">
+              <button onClick={() => editTodo(todo.id)} className="text-blue-500 hover:text-blue-700">
+                <FiEdit size={20} />
               </button>
-              <button
-                className="bg-red-600 text-white font-semibold py-1 px-3 rounded-lg transition duration-300 hover:bg-red-700"
-                onClick={() => handleDelete(todo.id)}
-              >
-                ❌ Delete
+              <button onClick={() => deleteTodo(todo.id)} className="text-red-500 hover:text-red-700">
+                <FiTrash size={20} />
               </button>
             </div>
           </div>
