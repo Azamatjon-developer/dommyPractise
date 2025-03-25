@@ -6,8 +6,16 @@ const Sidebar = () => {
   const location = useLocation();
 
   const links = [
-    { to: "/", label: "Home", icon: <Home size={20} /> },
-    { to: "/products", label: "Products", icon: <ShoppingCart size={20} /> },
+    {
+      to: "/",
+      label: "Home",
+      icon: <Home size={20} /> 
+    },
+    { 
+      to: "/products",
+      label: "Products",
+      icon: <ShoppingCart size={20} /> 
+      },
     { to: "/users", label: "Users", icon: <Users size={20} /> },
     { to: "/posts", label: "Posts", icon: <FileText size={20} /> },
     { to: "/todos", label: "Todos", icon: <CheckSquare size={20} /> },
@@ -21,10 +29,12 @@ const Sidebar = () => {
           <Link
             key={link.to}
             to={link.to}
-            className={`flex items-center gap-3 p-3 rounded-lg transition duration-300 ${
+            className={`flex items-center gap-3 p-3 rounded-lg transition duration-300 
+              
+              ${
               location.pathname === link.to
                 ? "bg-gray-700 shadow-md"
-                : "hover:bg-gray-700"
+                : "hover:bg-gray-500"
             }`}
           >
             {link.icon}

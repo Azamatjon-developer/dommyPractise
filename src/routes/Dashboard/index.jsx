@@ -6,6 +6,7 @@ import Products from "../../pages/dashboard/products/Products";
 import Posts from "../../pages/dashboard/posts/Posts";
 import Todos from "../../pages/dashboard/todos/Todos";
 import Sidebar from "../../components/Sidebar";
+import SinglePost from "../../pages/dashboard/posts/SinglePost";
 
 const DashboardRouter = () => {
   return (
@@ -21,6 +22,7 @@ const DashboardRouter = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/users" element={<Users />} />
             <Route path="/posts" element={<Posts />} />
+            <Route path="/posts/:id" element={<SinglePost/>} />
             <Route path="/todos" element={<Todos />} />
           </Routes>
         </div>
