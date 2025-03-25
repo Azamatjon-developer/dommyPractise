@@ -27,20 +27,12 @@ const Login = () => {
 
       if (response.ok) {
         dispatch(login(data.accessToken));
-        toast.success("✅ Muvaffaqiyatli tizimga kirdingiz!", {
-          position: "top-right",
-        });
+        toast.success("Muvaffaqiyatli tizimga kirdingiz!");
       } else {
         setError(data.message || "Login xatosi");
-        toast.error(data.message || "❌ Login xatosi", {
-          position: "top-right",
-        });
       }
     } catch (error) {
       setError("Tarmoq xatosi");
-      toast.error("❌ Tarmoq xatosi. Iltimos, qaytadan urinib ko‘ring!", {
-        position: "top-right",
-      });
     }
   };
 
@@ -79,9 +71,17 @@ const Login = () => {
           Login
         </button>
       </form>
-      
-      {/* ToastContainer komponenti xabarlarni chiqarish uchun */}
-      <ToastContainer autoClose={3000} />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000} // 3 soniyadan keyin yopiladi
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
