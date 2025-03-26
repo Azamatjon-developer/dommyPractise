@@ -22,7 +22,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="h-screen w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white fixed p-5 shadow-lg">
+    <div className="h-screen min-w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white fixed p-5 shadow-lg">
       <h1 className="text-2xl font-bold mb-8 text-center">Dashboard</h1>
       <nav className="flex flex-col space-y-3">
         {links.map((link) => (
