@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SinglePost = () => {
-  const { id } = useParams(); // URL dan ID ni olish
+  const { id } = useParams(); 
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ const SinglePost = () => {
 
   useEffect(() => {
     axios
-      .get(`https://dummyjson.com/posts/${id}`) // ✅ TO'G'RI URL
+      .get(`https://dummyjson.com/posts/${id}`) 
       .then((res) => {
         setPost(res.data);
         setLoading(false);
@@ -30,7 +30,9 @@ const SinglePost = () => {
       <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl w-full">
         <h1 className="text-3xl font-bold text-gray-800">{post.title}</h1>
         <p className="text-gray-600 mt-4 text-lg">{post.body}</p>
-        <p className="text-gray-500 mt-2">💬 Comments: {post.reactions}</p>
+        <p className="text-gray-500 mt-2">
+          👍 Likes: {post.reactions?.likes} | 👎 Dislikes: {post.reactions?.dislikes}
+        </p>
         <p className="text-gray-500 mt-1">
           🏷️ Tags: {post.tags?.join(", ")}
         </p>
