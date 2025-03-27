@@ -27,6 +27,7 @@ const Login = () => {
 
       if (response.ok) {
         dispatch(login(data.accessToken));
+        localStorage.setItem("token", data.accessToken)
         toast.success("Muvaffaqiyatli tizimga kirdingiz!");
       } else {
         setError(data.message || "Login xatosi");
