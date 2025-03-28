@@ -10,10 +10,10 @@ import SinglePost from "../../pages/dashboard/posts/SinglePost";
 
 const DashboardRouter = () => {
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex w-full">
       <Sidebar />
 
-      <div className="flex-2 p-6 bg-gray-100 overflow-auto ml-64">
+      <div className="flex-2  ml-64">
         <div className="bg-white shadow-md rounded-lg p-5 h-full">
           <Routes>
             <Route path="/" element={<Home />} />

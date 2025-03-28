@@ -25,20 +25,22 @@ const Posts = () => {
   if (error) return <p className="text-center mt-10 text-red-500 text-xl">{error}</p>;
 
   return (
-    <div className=" bg-gradient-to-rflex flex-col items-center p-10">
-      <h1 className="text-5xl font-extrabold text-white mb-10">📝 Blog Postlar</h1>
-      <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black p-10">
+      <h1 className="text-5xl font-extrabold text-white text-center mb-10">
+        📝 Blog Postlar
+      </h1>
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {posts.map((post) => (
           <div
             key={post.id}
-            className="bg-gray-200 shadow-lg rounded-2xl p-6 transform transition duration-300 hover:scale-105 hover:shadow-2xl flex flex-col justify-between"
+            className="bg-gray-800 text-white shadow-lg rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl flex flex-col justify-between"
           >
-            <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
-            <p className="text-gray-400 mt-2 text-sm">
+            <h2 className="text-2xl font-bold mb-3">{post.title}</h2>
+            <p className="text-gray-400 text-sm">
               {post.body.length > 100 ? post.body.substring(0, 100) + "..." : post.body}
             </p>
             <button
-              className="mt-4 bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:bg-blue-600"
+              className="mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:from-blue-600 hover:to-indigo-700"
               onClick={() => navigate(`/posts/${post.id}`)}
             >
               📖 Read More
